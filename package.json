@@ -1,0 +1,28 @@
+{
+  "name": "sync-jira-ado",
+  "version": "1.0.0",
+  "description": "Sync tickets from Jira to Azure DevOps every 2 minutes by updatedAt",
+  "keywords": [
+    "jira",
+    "ado",
+    "sync",
+    "vercel"
+  ],
+  "license": "ISC",
+  "author": "bvmin.dev@gmail.com",
+  "type": "module",
+  "main": "api/sync.js",
+  "scripts": {
+    "dev": "vercel dev",
+    "sync:local": "node scripts/run-local.js"
+  },
+  "dependencies": {
+    "axios": "^1.7.7"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "devDependencies": {
+    "dotenv": "^17.4.2"
+  }
+}
