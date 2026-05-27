@@ -14,7 +14,8 @@
   "main": "api/sync.js",
   "scripts": {
     "dev": "vercel dev",
-    "sync:local": "node scripts/run-local.js"
+    "sync:local": "node scripts/run-local.js",
+    "delete:ado": "node scripts/delete-ado-tickets.js"
   },
   "dependencies": {
     "axios": "^1.7.7",
