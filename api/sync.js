@@ -93,9 +93,10 @@ async function runSync() {
         continue;
       }
       const issueDetail = issueDetailList[0];
-      if (issueDetail.key === "SE-156") {
-        console.log("den roi");
+      if (issueDetail.key !== "SE-122") {
+        continue;
       }
+      console.log("den roi");
 
       const workItemType = resolveAdoType(issueDetail);
       const title = issueDetail.fields.summary;
@@ -114,33 +115,25 @@ async function runSync() {
       const component = issueDetail.fields.components.name;
       const areaPath = `Tickets\\Clients\\C-Keppel\\P-KAI`;
       const iterationPath = `Tickets\\Weekly Sprint\\Sprint 62`;
-      const createdByOld =
-        (issueDetail.fields?.reporter?.emailAddress ??
-        issueDetail.fields?.reporter?.displayName === "Phạm Quang Huy")
-          ? "huy.pham@atstechnology.vn"
-          : issueDetail.fields?.reporter?.displayName === "Nguyen Hong Quan"
-            ? "quan.nguyen@atstechnology.vn"
-            : issueDetail.fields?.reporter?.displayName === "Thai Le (Tyson)"
-              ? "thai.le@atstechnology.vn"
-              : issueDetail.fields?.reporter?.displayName === "Hien To"
-                ? "hien.to@atstechnology.vn"
-                : issueDetail.fields?.reporter?.displayName === "Le Phi Hung"
-                  ? "hung.le@atstechnology.vn"
-                  : "hung.le@atstechnology.vn"; // đổi về mail torus
+      const displayNameToEmail = {
+        "Phạm Quang Huy": "huy.pham@atstechnology.vn",
+        "Nguyen Hong Quan": "quan.nguyen@atstechnology.vn",
+        "Thai Le (Tyson)": "thai.le@atstechnology.vn",
+        "Hien To": "hien.to@atstechnology.vn",
+        "Le Phi Hung": "hung.le@atstechnology.vn",
+      };
 
+      const reporterEmail = issueDetail.fields?.reporter?.emailAddress;
+      const reporterName = issueDetail.fields?.reporter?.displayName;
+      const assigneeEmail = issueDetail.fields?.assignee?.emailAddress;
+      const assigneeName = issueDetail.fields?.assignee?.displayName;
+
+      const createdByOld =
+        reporterEmail ??
+        displayNameToEmail[reporterName] ??
+        "hung.le@atstechnology.vn";
       const assignToOld =
-        (issueDetail.fields?.assignee?.emailAddress ??
-        issueDetail.fields?.assignee?.displayName === "Phạm Quang Huy")
-          ? "huy.pham@atstechnology.vn"
-          : issueDetail.fields?.assignee?.displayName === "Nguyen Hong Quan"
-            ? "quan.nguyen@atstechnology.vn"
-            : issueDetail.fields?.assignee?.displayName === "Thai Le (Tyson)"
-              ? "thai.le@atstechnology.vn"
-              : issueDetail.fields?.assignee?.displayName === "Hien To"
-                ? "hien.to@atstechnology.vn"
-                : issueDetail.fields?.assignee?.displayName === "Le Phi Hung"
-                  ? "hung.le@atstechnology.vn"
-                  : ""; // đổi về mail torus
+        assigneeEmail ?? displayNameToEmail[assigneeName] ?? "";
 
       const createdBy =
         createdByOld.includes("hien.to") ||
