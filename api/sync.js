@@ -93,10 +93,10 @@ async function runSync() {
         continue;
       }
       const issueDetail = issueDetailList[0];
-      if (issueDetail.key !== "SE-122") {
-        continue;
-      }
-      console.log("den roi");
+      // if (issueDetail.key !== "SE-122") {
+      //   continue;
+      // }
+      // console.log("den roi");
 
       const workItemType = resolveAdoType(issueDetail);
       const title = issueDetail.fields.summary;
